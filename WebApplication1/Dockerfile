@@ -8,9 +8,9 @@ COPY /. ./
 RUN dotnet restore
 
 # build with configuration
-RUN dotnet build TodoApi.csproj -c Release
+RUN dotnet build WebApplication1.csproj -c Release
 
-RUN dotnet publish TodoApi.csproj -c Release -o /src/output
+RUN dotnet publish WebApplication1.csproj -c Release -o /src/output
 
 # create the runtime instance
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS runtime
@@ -25,4 +25,4 @@ RUN apk add libc-dev --no-cache
 
 COPY --from=build /src/output .
 
-ENTRYPOINT ["dotnet", "TodoApi.dll"]
+ENTRYPOINT ["dotnet", "WebApplication1.dll"]
