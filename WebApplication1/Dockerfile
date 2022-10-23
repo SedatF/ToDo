@@ -1,5 +1,5 @@
 # create the build instance
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
 
 WORKDIR /source
 COPY /. ./
@@ -13,7 +13,7 @@ RUN dotnet build WebApplication1.csproj -c Release
 RUN dotnet publish WebApplication1.csproj -c Release -o /src/output
 
 # create the runtime instance
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS runtime
+FROM mcr.microsoft.com/dotnet/nightly/aspnet:5.0-alpine AS runtime
 
 # add globalization support
 RUN apk add --no-cache icu-libs
